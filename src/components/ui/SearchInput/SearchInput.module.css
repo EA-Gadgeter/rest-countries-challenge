@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  width: 100%;
+  padding: 1.5rem 3rem;
+
+  background-color: var(--white);
+  border-radius: 0.5rem;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+}
+
+.container_dark {
+  background-color: var(--dark-blue);
+}
+
+.input {
+  flex: 1;
+  font-size: 1.2rem;
+  border: none;
+
+  background-color: transparent;
+  color: var(--dark-gray);
+
+  @media screen and (width >= 768px) {
+    font-size: 1.4rem;
+  }
+}
+
+.input::placeholder {
+  color: var(--dark-gray);
+}
+
+.input_dark {
+  color: var(--white);
+}
+
+.input_dark::placeholder {
+  color: var(--white);
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input_icon {
+  width: 1.6rem;
+  height: 1.6rem;
+
+  @media screen and (width >= 768px) {
+    width: 1.8rem;
+    height: 1.8rem; 
+  }
+}
