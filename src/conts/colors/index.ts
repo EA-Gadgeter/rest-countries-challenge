@@ -1,0 +1,6 @@
+export const DARK_BLUE = "#2b3743"; // Dark Mode Elements: hsl(209, 23%, 22%)
+export const VERY_DARK_BLUE_BG = "#202d36"; // Dark Mode Background: hsl(207, 26%, 17%)
+export const VERY_DARK_BLUE_TEXT = "#111517"; // Light Mode Text: hsl(200, 15%, 8%)
+export const DARK_GRAY_INPUT = "#858585"; // Light Mode Input: hsl(0, 0%, 52%)
+export const VERY_LIGHT_GRAY_BG = "#fafafa"; // Light Mode Background: hsl(0, 0%, 98%)
+export const WHITE = "#ffffff"; // Dark Mode Text & Light Mode Elements: hsl(0, 0%, 100%)
