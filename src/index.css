@@ -2,14 +2,14 @@
 
 @font-face {
   font-family: 'Nunito Sans';
-  src: url('/public/fonts/nunito_sans/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf') format('truetype');
+  src: url('/fonts/nunito_sans/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Nunito Sans';
-  src: url('/public/fonts/nunito_sans/NunitoSans-Italic-VariableFont_YTLC,opsz,wdth,wght.ttf') format('truetype');
+  src: url('/fonts/nunito_sans/NunitoSans-Italic-VariableFont_YTLC,opsz,wdth,wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: italic;
 }
@@ -21,6 +21,7 @@
   --white: hsl(0, 0%, 100%);
   --dark-gray: hsl(0, 0%, 52%);
   --very-dark-blue-text: hsl(200, 15%, 8%);
+  --main-font: 'Nunito Sans', sans-serif;
 }
 
 html {
@@ -28,12 +29,18 @@ html {
 }
 
 body {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: var(--main-font);
   font-size: 1.6rem;
 
-  background-color: var(--white);
+  background-color: var(--very-light-gray);
 }
 
 html[data-theme='dark'] body {
   background-color: var(--very-dark-blue-bg);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }

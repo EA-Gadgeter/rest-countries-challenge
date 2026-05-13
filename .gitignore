@@ -8,10 +8,13 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+mock
 style-info
 dist
 dist-ssr
 *.local
+AGENTS.md
+INSTRUCTIONS.md
 
 # Editor directories and files
 .vscode/*
