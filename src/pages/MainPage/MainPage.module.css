@@ -9,8 +9,12 @@
 
   @media screen and (width >= 768px) {
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
+    gap: 1rem;
+  }
+
+  @media screen and (width >= 1440px) {
+    justify-content: space-between;
   }
 }
 
@@ -18,15 +22,36 @@
   width: 100%;
 
   @media screen and (width >= 768px) {
+    flex: 1;
+  }
+
+  @media screen and (width >= 1440px) {
     width: 40%;
     max-width: 48rem;
   }
 }
 
 .country_filter {
-  margin-top: 4rem;
+  margin-top: 3.75rem;
 
   @media screen and (width >= 768px) {
     margin-top: 0;
+  }
+}
+
+.countries_grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  margin-top: 3.2rem;
+
+  @media screen and (width >= 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem 4.8rem;
+    margin-top: 4.8rem;
+  }
+
+  @media screen and (width >= 1440px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

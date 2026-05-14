@@ -8,9 +8,11 @@ import styles from "./SearchInput.module.css";
 
 interface Props {
   className?: string;
+  value: string;
+  onChange: (value: string) => void;
 }
 
-export const SearchInput = ({ className }: Props) => {
+export const SearchInput = ({ className, value, onChange }: Props) => {
   const theme = useThemeStore(state => state.theme);
   const isDarkMode = theme === "dark";
 
@@ -21,9 +23,11 @@ export const SearchInput = ({ className }: Props) => {
         strokeColor={isDarkMode ? WHITE : DARK_GRAY_INPUT} 
       />
       
-      <input 
+      <input
         className={`${styles.input} ${isDarkMode && styles.input_dark}`}
-        type="text" 
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         placeholder="Search for a country..." />
     </div>
   );

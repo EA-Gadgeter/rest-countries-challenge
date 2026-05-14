@@ -1,4 +1,4 @@
-import { SemiMoonIcon } from "@/components/icons";
+import { SemiMoonIcon, SunIcon } from "@/components/icons";
 
 import { VERY_DARK_BLUE_TEXT, WHITE } from "@/conts/colors";
 
@@ -23,14 +23,18 @@ export const Header = () => {
         className={`${styles.button} ${isDarkTheme && styles.button_dark}`}
         onClick={toggleTheme}
       >
-        <SemiMoonIcon
-          className={styles.icon} 
-          fillColor={isDarkTheme ? WHITE : ""}
-          strokeColor={isDarkTheme ? WHITE : VERY_DARK_BLUE_TEXT}
-        />
+        {isDarkTheme ? (
+          <SunIcon className={styles.icon} strokeColor={WHITE} />
+        ) : (
+          <SemiMoonIcon
+            className={styles.icon}
+            fillColor=""
+            strokeColor={VERY_DARK_BLUE_TEXT}
+          />
+        )}
 
         <span>
-          Dark Mode
+          {isDarkTheme ? "Light Mode" : "Dark Mode"}
         </span>
       </button>
     </header>

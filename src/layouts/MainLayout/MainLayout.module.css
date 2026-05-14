@@ -4,4 +4,9 @@
 
   padding-inline: 1.5rem;
   padding-top: 2.5rem;
+
+  @media screen and (width >= 768px) {
+    padding-inline: 8rem;
+    padding-top: 5rem;
+  }
 } 
