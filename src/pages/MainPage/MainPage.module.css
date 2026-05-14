@@ -39,6 +39,17 @@
   }
 }
 
+.status_message {
+  margin-top: 4rem;
+  text-align: center;
+  font-size: 1.6rem;
+  color: var(--very-dark-blue-text);
+}
+
+:global(html[data-theme='dark']) .status_message {
+  color: var(--white);
+}
+
 .countries_grid {
   display: grid;
   grid-template-columns: 1fr;

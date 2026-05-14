@@ -12,7 +12,7 @@ export const MainPage = () => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
 
-  const countries = useCountries({ search: searchValue, region: selectedRegion });
+  const { countries, isLoading, error } = useCountries({ search: searchValue, region: selectedRegion });
 
   return (
     <>
@@ -29,11 +29,19 @@ export const MainPage = () => {
         />
       </fieldset>
 
-      <div className={styles.countries_grid}>
-        {countries.map((country) => (
-          <CountryCard key={country.alpha3Code} country={country} />
-        ))}
-      </div>
+      {isLoading ? (
+        <p className={styles.status_message}>Loading...</p>
+      ) : error ? (
+        <p className={styles.status_message}>Something went wrong. Please try again.</p>
+      ) : countries.length === 0 ? (
+        <p className={styles.status_message}>No countries found.</p>
+      ) : (
+        <div className={styles.countries_grid}>
+          {countries.map((country) => (
+            <CountryCard key={country.cca3} country={country} />
+          ))}
+        </div>
+      )}
     </>
   );
 };

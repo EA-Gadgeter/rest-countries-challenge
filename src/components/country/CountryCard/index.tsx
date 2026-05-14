@@ -16,12 +16,13 @@ export const CountryCard = ({ country }: Props) => {
 
   return (
     <Link
-      to={`/${country.alpha3Code}`}
+      to={`/${country.cca3}`}
+      state={{ country }}
       className={`${styles.card} ${isDarkMode ? styles.card_dark : ""}`}
     >
       <div className={styles.flag_container}>
         <img
-          src={country.flags.svg || country.flags.png}
+          src={country.flag.svg || country.flag.png}
           alt={`Flag of ${country.name}`}
           className={styles.flag}
           loading="lazy"
