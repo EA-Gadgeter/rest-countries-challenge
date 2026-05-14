@@ -12,6 +12,15 @@ export interface CountryDetail {
   borders?: string[];
 }
 
+export const getCountryCardByCode = async (cca3: string): Promise<Country> => {
+  const response = await fetch(`${API_BASE_URL}/alpha/${cca3}?fields=${CARD_FIELDS}`);
+
+  if (!response.ok) throw new Error("Failed to fetch country");
+
+  const raw: RawCountry = await response.json();
+  return mapCountry(raw);
+};
+
 export const getCountryByCode = async (cca3: string): Promise<CountryDetail> => {
   const response = await fetch(`${API_BASE_URL}/alpha/${cca3}?fields=${DETAIL_FIELDS}`);
 

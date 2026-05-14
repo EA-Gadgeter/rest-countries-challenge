@@ -17,7 +17,6 @@ export const CountryCard = ({ country }: Props) => {
   return (
     <Link
       to={`/${country.cca3}`}
-      state={{ country }}
       className={`${styles.card} ${isDarkMode ? styles.card_dark : ""}`}
     >
       <div className={styles.flag_container}>

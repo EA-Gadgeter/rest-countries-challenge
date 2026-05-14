@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useParams, useNavigate } from "react-router";
 
 import { ArrowLeftIcon } from "@/components/icons";
 import { useThemeStore } from "@/stores/themeStore";
 import { WHITE, VERY_DARK_BLUE_TEXT } from "@/conts/colors";
-import { getCountryByCode, getBorderCountries } from "@/services/getCountryByCode";
+import { getCountryCardByCode, getCountryByCode, getBorderCountries } from "@/services/getCountryByCode";
 
 import type { Country } from "@/types/country";
 import type { CountryDetail } from "@/services/getCountryByCode";
@@ -12,36 +12,49 @@ import type { CountryDetail } from "@/services/getCountryByCode";
 import styles from "./CountryPage.module.css";
 
 export const CountryPage = () => {
-  const { state } = useLocation();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const theme = useThemeStore((state) => state.theme);
   const isDarkTheme = theme === "dark";
 
-  const country = (state?.country ?? null) as Country | null;
+  const [country, setCountry] = useState<Country | null>(null);
+  const [countryLoading, setCountryLoading] = useState(true);
+  const [countryError, setCountryError] = useState(false);
 
   const [detailData, setDetailData] = useState<CountryDetail | null>(null);
   const [borderCountries, setBorderCountries] = useState<Country[]>([]);
   const [bordersLoading, setBordersLoading] = useState(false);
 
-  // Effect 1: fetch the fields not available from the card (subregion, tld, currencies, languages, borders)
+  // Effect 1: fetch base card data + detail fields in parallel by country code
+  // Need to fetches since the country api just allow fetching 10 fields at once, 
+  // so one its for the data that its also shown in index, and other for detail.
   useEffect(() => {
-    if (!country?.cca3) return;
+    if (!id) return;
 
     let cancelled = false;
+    setCountry(null);
     setDetailData(null);
+    setCountryLoading(true);
+    setCountryError(false);
 
-    getCountryByCode(country.cca3)
-      .then((data) => {
-        if (!cancelled) setDetailData(data);
+    Promise.all([getCountryCardByCode(id), getCountryByCode(id)])
+      .then(([cardData, detail]) => {
+        if (!cancelled) {
+          setCountry(cardData);
+          setDetailData(detail);
+        }
       })
       .catch(() => {
-        if (!cancelled) setDetailData({});
+        if (!cancelled) setCountryError(true);
+      })
+      .finally(() => {
+        if (!cancelled) setCountryLoading(false);
       });
 
     return () => {
       cancelled = true;
     };
-  }, [country?.cca3]);
+  }, [id]);
 
   // Effect 2: once we have the borders list, fetch the country data for each border button
   useEffect(() => {
@@ -75,14 +88,18 @@ export const CountryPage = () => {
   const pageClass = `${styles.page} ${isDarkTheme ? styles.page_dark : ""}`;
   const iconStroke = isDarkTheme ? WHITE : VERY_DARK_BLUE_TEXT;
 
-  if (!country) {
+  if (countryLoading) {
+    return <div className={pageClass} />;
+  }
+
+  if (countryError || !country) {
     return (
       <div className={pageClass}>
         <button className={styles.back_btn} onClick={() => navigate("/")}>
           <ArrowLeftIcon strokeColor={iconStroke} />
           <span>Back</span>
         </button>
-        <p className={styles.no_data}>No country data available.</p>
+        <p className={styles.no_data}>Country not found.</p>
       </div>
     );
   }
@@ -156,9 +173,7 @@ export const CountryPage = () => {
                   <button
                     key={border.cca3}
                     className={styles.border_tag}
-                    onClick={() =>
-                      navigate(`/${border.cca3}`, { state: { country: border } })
-                    }
+                    onClick={() => navigate(`/${border.cca3}`)}
                   >
                     {border.name}
                   </button>
