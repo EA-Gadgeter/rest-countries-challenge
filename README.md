@@ -29,7 +29,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://github.com/EA-Gadgeter/rest-countries-challenge](https://github.com/EA-Gadgeter/rest-countries-challenge)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [https://ea-gadgeter.github.io/rest-countries-challenge/](https://ea-gadgeter.github.io/rest-countries-challenge/)
 
 ## My process
 
