@@ -15,6 +15,7 @@ dist-ssr
 *.local
 AGENTS.md
 INSTRUCTIONS.md
+FIELDS.md
 
 # Editor directories and files
 .vscode/*
